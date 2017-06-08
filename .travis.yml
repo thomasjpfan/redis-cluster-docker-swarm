@@ -9,9 +9,10 @@ before_install:
 
 script:
   - bash scripts/build.sh $TRAVIS_BRANCH
-  - docker network create redis
+  - docker swarm init
+  - docker network create --attachable --driver overlay redis
   - bash scripts/bootstrap.sh $TRAVIS_BRANCH
-  - bash scripts/test.sh $TRAVIS_BRANCH
+  - bash scripts/test_init.sh $TRAVIS_BRANCH
   - bash scripts/test_scale.sh $TRAVIS_BRANCH
 
 after_script:
