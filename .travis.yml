@@ -1,0 +1,31 @@
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - sudo apt-get update
+  - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-engine
+
+script:
+  - bash scripts/build.sh $TRAVIS_BRANCH
+  - docker network create redis
+  - bash scripts/bootstrap.sh $TRAVIS_BRANCH
+  - bash scripts/test.sh $TRAVIS_BRANCH
+  - bash scripts/test_scale.sh $TRAVIS_BRANCH
+
+after_script:
+  - docker network rm redis
+  - bash scripts/cleanup.sh $TRAVIS_BRANCH
+
+after_success:
+  - >
+    if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      docker tag redis-look:master redis-look:latest
+      docker tag redis-sentinel:master redis-sentinel:latest
+      docker tag redis-utils:master redis-sentinel:latest
+      docker push redis-look:latest
+      docker push redis-sentinel:latest
+      docker push redis-utils:latest
+    fi

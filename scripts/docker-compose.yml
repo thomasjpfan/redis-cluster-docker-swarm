@@ -1,0 +1,29 @@
+version: '3.1'
+
+
+services:
+
+  redis-sentinel:
+    image: redis-sentinel:$TAG
+    environment:
+      - REDIS_IP=redis-zero
+      - REDIS_MASTER_NAME=redismaster
+    deploy:
+      replicas: 3
+    networks:
+      - redis
+
+  redis:
+    image: redis-look:$TAG
+    environment:
+      - REDIS_SENTINEL_IP=redis-sentinel
+      - REDIS_MASTER_NAME=redismaster
+      - REDIS_SENTINEL_PORT=26379
+    deploy:
+      replicas: 3
+    networks:
+      - redis
+
+networks:
+  redis:
+    external: true
