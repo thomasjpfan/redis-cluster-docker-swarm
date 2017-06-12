@@ -29,7 +29,7 @@ after_success:
 
       docker tag redis-look:master redis-look:$LOOK_VERSION
       docker tag redis-sentinel:master redis-sentinel:$SENTINEL_VERSION
-      docerk tag redis-utils:master redis-sentinel:$UTILS_VERSION
+      docker tag redis-utils:master redis-utils:$UTILS_VERSION
 
       docker push redis-look:$LOOK_VERSION
       docker push redis-sentinel:$SENTINEL_VERSION
