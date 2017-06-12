@@ -23,10 +23,16 @@ after_success:
   - >
     if [ "$TRAVIS_BRANCH" == "master" ]; then
       docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
-      docker tag redis-look:master redis-look:latest
-      docker tag redis-sentinel:master redis-sentinel:latest
-      docker tag redis-utils:master redis-sentinel:latest
-      docker push redis-look:latest
-      docker push redis-sentinel:latest
-      docker push redis-utils:latest
+      LOOK_VERSION=$(cat redis-look/VERSION)
+      SENTINEL_VERSION=$(cat redis-sentinel/VERSION)
+      UTILS_VERSION=$(cat redis-utils/VERSION)
+
+      docker tag redis-look:master redis-look:$LOOK_VERSION
+      docker tag redis-sentinel:master redis-sentinel:$SENTINEL_VERSION
+      docerk tag redis-utils:master redis-sentinel:$UTILS_VERSION
+
+      docker push redis-look:$LOOK_VERSION
+      docker push redis-sentinel:$SENTINEL_VERSION
+      docker push redis-utils:$UTILS_VERSION
+
     fi
