@@ -20,18 +20,19 @@ after_script:
   - bash scripts/cleanup.sh $TRAVIS_BRANCH
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" == "master" ]; then
-      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-      LOOK_VERSION=$(cat redis-look/VERSION);
-      SENTINEL_VERSION=$(cat redis-sentinel/VERSION);
-      UTILS_VERSION=$(cat redis-utils/VERSION);
+  - >
+    if [ "$TRAVIS_BRANCH" == "master" ]; then
+      docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+      LOOK_VERSION=$(cat redis-look/VERSION)
+      SENTINEL_VERSION=$(cat redis-sentinel/VERSION)
+      UTILS_VERSION=$(cat redis-utils/VERSION)
 
-      docker tag redis-look:master redis-look:$LOOK_VERSION;
-      docker tag redis-sentinel:master redis-sentinel:$SENTINEL_VERSION;
-      docker tag redis-utils:master redis-utils:$UTILS_VERSION;
+      docker tag redis-look:master thomasjpfan/redis-look:$LOOK_VERSION
+      docker tag redis-sentinel:master thomasjpfan/redis-sentinel:$SENTINEL_VERSION
+      docker tag redis-utils:master thomasjpfan/redis-utils:$UTILS_VERSION
 
-      docker push redis-look:$LOOK_VERSION;
-      docker push redis-sentinel:$SENTINEL_VERSION;
-      docker push redis-utils:$UTILS_VERSION;
+      docker push thomasjpfan/redis-look:$LOOK_VERSION
+      docker push thomasjpfan/redis-sentinel:$SENTINEL_VERSION
+      docker push thomasjpfan/redis-utils:$UTILS_VERSION
 
     fi
