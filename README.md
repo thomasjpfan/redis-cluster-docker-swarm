@@ -30,7 +30,7 @@ version: '3.1'
 services:
 
   redis-sentinel:
-    image: redis-sentinel:latest
+    image: redis-sentinel:v0.1.0-redis-3.2.9
     environment:
       - REDIS_IP=redis-zero
       - REDIS_MASTER_NAME=redismaster
@@ -40,7 +40,7 @@ services:
       - redis
 
   redis:
-    image: redis-look:latest
+    image: redis-look:v0.1.0-redis-3.2.9
     environment:
       - REDIS_SENTINEL_IP=redis-sentinel
       - REDIS_MASTER_NAME=redismaster
