@@ -1,4 +1,4 @@
-FROM redis:3.2.9-alpine
+FROM redis:4.0.0-alpine
 
 RUN apk --no-cache add drill
 
