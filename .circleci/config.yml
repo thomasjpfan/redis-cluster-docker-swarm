@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Test Scale
           command: |
-            sh scripts/test_scaling.sh $CIRCLE_BRANCH
+            sh scripts/test_scale.sh $CIRCLE_BRANCH
       - run:
           name: Teardown
           command: |
