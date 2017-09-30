@@ -9,26 +9,26 @@ jobs:
       - run:
           name: Build Images
           command: |
-            bash scripts/build.sh $CIRCLE_BRANCH
+            sh scripts/build.sh $CIRCLE_BRANCH
       - run:
           name: Bootstrap tests
           command: |
             docker swarm init
             docker network create --attachable --driver overlay redis
-            bash scripts/bootstrap.sh $CIRCLE_BRANCH
+            sh scripts/bootstrap.sh $CIRCLE_BRANCH
       - run:
           name: Test init
           command: |
-            bash scripts/test_init.sh $CIRCLE_BRANCH
+            sh scripts/test_init.sh $CIRCLE_BRANCH
       - run:
           name: Test Scale
           command: |
-            bash scripts/test_scale.sh $CIRCLE_BRANCH
+            sh scripts/test_scale.sh $CIRCLE_BRANCH
       - run:
           name: Teardown
           command: |
             docker network rm redis
-            bash scripts/cleanup.sh $CIRCLE_BRANCH
+            sh scripts/cleanup.sh $CIRCLE_BRANCH
           when: always
       - deploy:
           name: Push to Docker Hub
