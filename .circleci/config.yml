@@ -23,12 +23,12 @@ jobs:
       - run:
           name: Test Scale
           command: |
-            sh scripts/test_scale.sh $CIRCLE_BRANCH
+            sh scripts/test_scaling.sh $CIRCLE_BRANCH
       - run:
           name: Teardown
           command: |
-            docker network rm redis
             sh scripts/cleanup.sh $CIRCLE_BRANCH
+            docker network rm redis
           when: always
       - deploy:
           name: Push to Docker Hub
