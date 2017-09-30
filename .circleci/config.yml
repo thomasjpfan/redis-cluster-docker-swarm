@@ -1,0 +1,50 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: docker:17.09.0-ce-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build Images
+          command: |
+            bash scripts/build.sh $CIRCLE_BRANCH
+      - run:
+          name: Bootstrap tests
+          command: |
+            docker swarm init
+            docker network create --attachable --driver overlay redis
+            bash scripts/bootstrap.sh $CIRCLE_BRANCH
+      - run:
+          name: Test init
+          command: |
+            bash scripts/test_init.sh $CIRCLE_BRANCH
+      - run:
+          name: Test Scale
+          command: |
+            bash scripts/test_scale.sh $CIRCLE_BRANCH
+      - run:
+          name: Teardown
+          command: |
+            docker network rm redis
+            bash scripts/cleanup.sh $CIRCLE_BRANCH
+          when: always
+      - deploy:
+          name: Push to Docker Hub
+          command: |
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
+              LOOK_VERSION=$(cat redis-look/VERSION)
+              SENTINEL_VERSION=$(cat redis-sentinel/VERSION)
+              UTILS_VERSION=$(cat redis-utils/VERSION)
+
+              docker tag redis-look:master thomasjpfan/redis-look:$LOOK_VERSION
+              docker tag redis-sentinel:master thomasjpfan/redis-sentinel:$SENTINEL_VERSION
+              docker tag redis-utils:master thomasjpfan/redis-utils:$UTILS_VERSION
+
+              docker push thomasjpfan/redis-look:$LOOK_VERSION
+              docker push thomasjpfan/redis-sentinel:$SENTINEL_VERSION
+              docker push thomasjpfan/redis-utils:$UTILS_VERSION
+            fi
+
