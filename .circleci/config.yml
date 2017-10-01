@@ -19,7 +19,7 @@ jobs:
       - run:
           name: Test init
           command: |
-            sh scripts/test_init.sh $CIRCLE_WORKING_DIRECTORY
+            sh scripts/test_init.sh project
       - run:
           name: Test Scale
           command: |

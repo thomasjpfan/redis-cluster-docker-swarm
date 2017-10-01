@@ -1,6 +1,6 @@
 # Redis Cluster Cache for Docker Swarm
 
-[![Build Status](https://travis-ci.org/thomasjpfan/redis-cluster-docker-swarm.svg?branch=master)](https://travis-ci.org/thomasjpfan/redis-cluster-docker-swarm)
+[![CircleCI](https://circleci.com/gh/thomasjpfan/redis-cluster-docker-swarm/tree/master.svg?style=svg)](https://circleci.com/gh/thomasjpfan/redis-cluster-docker-swarm/tree/master)
 
 Quick and dirty Redis cluster taking advantage of Redis Sentinel for automatic failover. Persistence is turned off by default.
 
