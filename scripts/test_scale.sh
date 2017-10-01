@@ -22,5 +22,5 @@ docker run --rm --network redis redis-utils:$TAG \
 $REDIS_SENTINEL_NAME $REDIS_MASTER_NAME reset "num-slaves" 4
 
 echo "Starting following tests"
-docker run --rm --network redis -v $PWD/scripts:/scripts \
+docker run --rm --network redis --volumes-from scripts \
 redis:4.0.2-alpine sh /scripts/check_scaling.sh 4 4
