@@ -1,4 +1,4 @@
-FROM redis:4.0.2-alpine
+FROM redis:4.0.6-alpine
 
 ENV REDIS_SENTINEL_IP redis-sentinel
 ENV REDIS_MASTER_NAME redismaster

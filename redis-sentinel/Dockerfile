@@ -1,4 +1,4 @@
-FROM redis:4.0.2-alpine
+FROM redis:4.0.6-alpine
 
 ENV SENTINEL_QUORUM=2 \
     SENTINEL_DOWN_AFTER=1000 \
