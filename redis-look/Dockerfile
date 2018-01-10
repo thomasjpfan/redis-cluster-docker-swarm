@@ -1,5 +1,7 @@
 FROM redis:4.0.6-alpine
 
+LABEL version="v0.1.0"
+
 ENV REDIS_SENTINEL_IP redis-sentinel
 ENV REDIS_MASTER_NAME redismaster
 ENV REDIS_SENTINEL_PORT 26379

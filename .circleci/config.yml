@@ -35,9 +35,17 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
-              LOOK_VERSION=$(cat redis-look/VERSION)
-              SENTINEL_VERSION=$(cat redis-sentinel/VERSION)
-              UTILS_VERSION=$(cat redis-utils/VERSION)
+              look_redis_v=$(grep "FROM redis" redis-look/Dockerfile | cut -d ":" -f2 | cut -d "-" -f1)
+              sentinel_redis_v=$(grep "FROM redis" redis-sentinel/Dockerfile | cut -d ":" -f2 | cut -d "-" -f1)
+              utils_redis_v=$(grep "FROM redis" redis-utils/Dockerfile | cut -d ":" -f2 | cut -d "-" -f1)
+
+              look_image_v=$(grep "LABEL version" redis-look/Dockerfile | cut -d "=" -f2 | tr -d '"')
+              sentinel_image_v=$(grep "LABEL version" redis-sentinel/Dockerfile | cut -d "=" -f2 | tr -d '"')
+              utils_image_v=$(grep "LABEL version" redis-utils/Dockerfile | cut -d "=" -f2 | tr -d '"')
+
+              LOOK_VERSION="${look_image_v}-redis-${look_redis_v}"
+              SENTINEL_VERSION="${sentinel_image_v}-redis-${sentinel_redis_v}"
+              UTILS_VERSION="${utils_image_v}-redis-${utils_redis_v}"
 
               docker tag redis-look:master thomasjpfan/redis-look:$LOOK_VERSION
               docker tag redis-sentinel:master thomasjpfan/redis-sentinel:$SENTINEL_VERSION
