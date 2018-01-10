@@ -1,5 +1,7 @@
 FROM redis:4.0.6-alpine
 
+LABEL version="v0.1.0"
+
 ENV SENTINEL_QUORUM=2 \
     SENTINEL_DOWN_AFTER=1000 \
     SENTINEL_FAILOVER=1000 \

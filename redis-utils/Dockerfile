@@ -1,5 +1,7 @@
 FROM redis:4.0.6-alpine
 
+LABEL version="v0.1.0"
+
 RUN apk --no-cache add drill
 
 COPY entrypoint.sh /usr/local/bin/
