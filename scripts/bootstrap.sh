@@ -9,7 +9,7 @@ REDIS_MASTER_NAME="redismaster"
 export TAG=${1:-"master"}
 
 echo "Starting redis-zero"
-docker service create --network redis --name redis-zero redis:4.0.6-alpine
+docker service create --network redis --name redis-zero redis:4.0.8-alpine
 
 echo "Starting services"
 docker stack deploy -c scripts/docker-compose.yml cache

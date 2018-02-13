@@ -1,4 +1,4 @@
-FROM redis:4.0.6-alpine
+FROM redis:4.0.8-alpine
 
 LABEL version="v0.1.0"
 
