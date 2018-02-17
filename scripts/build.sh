@@ -2,13 +2,13 @@
 
 set -e
 
-TAG=${1:-"master"}
+TAG=${1:-"latest"}
 
 echo "Building redis-look"
-docker build -t redis-look:$TAG redis-look
+docker build -t thomasjpfan/redis-look:$TAG redis-look
 
 echo "Building redis-sentinel"
-docker build -t redis-sentinel:$TAG redis-sentinel
+docker build -t thomasjpfan/redis-sentinel:$TAG redis-sentinel
 
 echo "Building redis-utils"
-docker build -t redis-utils:$TAG redis-utils
+docker build -t thomasjpfan/redis-utils:$TAG redis-utils

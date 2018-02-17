@@ -2,6 +2,6 @@
 
 set -e
 
-export TAG=${1:-"master"}
+export TAG=${1:-"latest"}
 
 docker stack rm cache

@@ -8,14 +8,18 @@ Quick and dirty Redis cluster taking advantage of Redis Sentinel for automatic f
 
 0. Setup docker swarm
 1. Create a overlay network:
-```
+
+```bash
 docker network create --attachable --driver overlay redis
 ```
+
 2. Modify scripts/docker-compose.yml to how you want to deploy the stack.
 3. Run `scripts/bootstrap.sh`.
-```
+
+```bash
 bash scripts/bootstrap.sh latest
 ```
+
 4. Profit!
 
 ## Details
@@ -30,7 +34,7 @@ version: '3.1'
 services:
 
   redis-sentinel:
-    image: redis-sentinel:v0.1.0-redis-4.0.8
+    image: thomasjpfan/redis-sentinel:v0.1.0-redis-4.0.8
     environment:
       - REDIS_IP=redis-zero
       - REDIS_MASTER_NAME=redismaster
@@ -40,7 +44,7 @@ services:
       - redis
 
   redis:
-    image: redis-look:v0.1.0-redis-4.0.8
+    image: thomasjpfan/redis-look:v0.1.0-redis-4.0.8
     environment:
       - REDIS_SENTINEL_IP=redis-sentinel
       - REDIS_MASTER_NAME=redismaster

@@ -4,7 +4,7 @@ version: '3.1'
 services:
 
   redis-sentinel:
-    image: redis-sentinel:${TAG:-master}
+    image: thomasjpfan/redis-sentinel:${TAG:-latest}
     environment:
       - REDIS_IP=redis-zero
       - REDIS_MASTER_NAME=redismaster
@@ -14,7 +14,7 @@ services:
       - redis
 
   redis:
-    image: redis-look:${TAG:-master}
+    image: thomasjpfan/redis-look:${TAG:-latest}
     environment:
       - REDIS_SENTINEL_IP=redis-sentinel
       - REDIS_MASTER_NAME=redismaster
