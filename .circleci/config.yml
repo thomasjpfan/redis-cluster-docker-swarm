@@ -33,7 +33,7 @@ jobs:
       - deploy:
           name: Push to Docker Hub
           command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ] && [ ! -z "$CIRCLE_PULL_REQUEST" ]; then
+            if [ "${CIRCLE_BRANCH}" == "master" ] && [ -z "$CIRCLE_PULL_REQUEST" ]; then
               docker login -u="${DOCKER_USERNAME}" -p="${DOCKER_PASSWORD}"
               look_redis_v=$(grep "FROM redis" redis-look/Dockerfile | cut -d ":" -f2 | cut -d "-" -f1)
               sentinel_redis_v=$(grep "FROM redis" redis-sentinel/Dockerfile | cut -d ":" -f2 | cut -d "-" -f1)
