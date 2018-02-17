@@ -54,5 +54,13 @@ jobs:
               docker push thomasjpfan/redis-look:$LOOK_VERSION
               docker push thomasjpfan/redis-sentinel:$SENTINEL_VERSION
               docker push thomasjpfan/redis-utils:$UTILS_VERSION
+
+              docker tag redis-look:master thomasjpfan/redis-look:latest
+              docker tag redis-sentinel:master thomasjpfan/redis-sentinel:latest
+              docker tag redis-utils:master thomasjpfan/redis-utils:latest
+
+              docker push thomasjpfan/redis-look:latest
+              docker push thomasjpfan/redis-sentinel:latest
+              docker push thomasjpfan/redis-utils:latest
             fi
 
