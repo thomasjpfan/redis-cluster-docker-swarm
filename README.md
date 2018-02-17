@@ -34,7 +34,7 @@ version: '3.1'
 services:
 
   redis-sentinel:
-    image: thomasjpfan/redis-sentinel:v0.1.0-redis-4.0.8
+    image: thomasjpfan/redis-sentinel
     environment:
       - REDIS_IP=redis-zero
       - REDIS_MASTER_NAME=redismaster
@@ -44,7 +44,7 @@ services:
       - redis
 
   redis:
-    image: thomasjpfan/redis-look:v0.1.0-redis-4.0.8
+    image: thomasjpfan/redis-look
     environment:
       - REDIS_SENTINEL_IP=redis-sentinel
       - REDIS_MASTER_NAME=redismaster
