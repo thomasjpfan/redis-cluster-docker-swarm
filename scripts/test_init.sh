@@ -10,4 +10,4 @@ docker cp scripts scripts:/
 
 echo "Starting init tests"
 docker run --rm --network redis --volumes-from scripts \
-	redis:4.0.8-alpine sh /scripts/check_scaling.sh 2 2
+	redis:4.0.9-alpine sh /scripts/check_scaling.sh 2 2

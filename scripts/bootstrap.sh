@@ -10,7 +10,7 @@ REDIS_SENTINEL_NAME="redis-sentinel"
 REDIS_MASTER_NAME="redismaster"
 
 echo "Starting redis-zero"
-docker service create --network redis --name redis-zero redis:4.0.8-alpine
+docker service create --network redis --name redis-zero redis:4.0.9-alpine
 
 echo "Starting services"
 docker stack deploy -c scripts/docker-compose.yml cache
