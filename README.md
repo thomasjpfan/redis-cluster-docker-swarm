@@ -20,7 +20,22 @@ docker network create --attachable --driver overlay redis
 bash scripts/bootstrap.sh latest
 ```
 
-4. Profit!
+4. Connect to with redis-cli
+
+```bash
+docker run --rm --network redis -ti redis:4.0.9-alpine redis-cli -h redis
+```
+
+To access the redis cluster outside of docker, port 6379 needs to be expose. This can be done by adding ports to the docker-compose file:
+
+```yaml
+...
+  redis:
+    image: thomasjpfan/redis-look
+    ports:
+      - "6379:6379"
+...
+```
 
 ## Details
 
