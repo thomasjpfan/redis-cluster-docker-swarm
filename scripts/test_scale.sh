@@ -23,4 +23,4 @@ docker run --rm --network redis thomasjpfan/redis-utils:$TAG \
 
 echo "Starting following tests"
 docker run --rm --network redis --volumes-from scripts \
-	redis:4.0.9-alpine sh /scripts/check_scaling.sh 4 4
+	redis:4.0.10-alpine sh /scripts/check_scaling.sh 4 4
