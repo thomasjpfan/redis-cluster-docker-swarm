@@ -4,13 +4,11 @@ REDIS_SENTINEL_NAME="$1"
 REDIS_MASTER_NAME="$2"
 shift 2
 
-sentinel_ips_list=$(drill tasks.$REDIS_SENTINEL_NAME | grep tasks.$REDIS_SENTINEL_NAME | tail -n +2)
-until [ "$sentinel_ips_list" ]; do
+sentinel_ips=$(drill tasks.$REDIS_SENTINEL_NAME | grep tasks.$REDIS_SENTINEL_NAME | tail -n +2 | awk '{print $5}')
+until [ "$sentinel_ips" ]; do
 	sleep 1
-	sentinel_ips_list=$(drill tasks.$REDIS_SENTINEL_NAME | grep tasks.$REDIS_SENTINEL_NAME | tail -n +2)
+	sentinel_ips=$(drill tasks.$REDIS_SENTINEL_NAME | grep tasks.$REDIS_SENTINEL_NAME | tail -n +2 | awk '{print $5}')
 done
-
-sentinel_ips=$(echo $sentinel_ips_list | awk '{print $5}')
 
 get_value() {
 	ip="$1"
