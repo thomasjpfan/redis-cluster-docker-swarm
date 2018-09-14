@@ -1,6 +1,6 @@
 FROM redis:4.0.10-alpine
 
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 
 ENV SENTINEL_QUORUM=2 \
     SENTINEL_DOWN_AFTER=1000 \
