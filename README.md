@@ -23,7 +23,7 @@ bash scripts/bootstrap.sh latest
 4. Connect to with redis-cli
 
 ```bash
-docker run --rm --network redis -ti redis:4.0.10-alpine redis-cli -h redis
+docker run --rm --network redis -ti redis:4.0.11-alpine redis-cli -h redis
 ```
 
 To access the redis cluster outside of docker, port 6379 needs to be expose. This can be done by adding ports to the docker-compose file:
