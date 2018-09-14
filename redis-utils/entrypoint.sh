@@ -10,7 +10,7 @@ until [ "$sentinel_ips_list" ]; do
 	sentinel_ips_list=$(drill tasks.$REDIS_SENTINEL_NAME | grep tasks.$REDIS_SENTINEL_NAME | tail -n +2)
 done
 
-sentinel_ips=$($sentinel_ips_list | awk '{print $5}')
+sentinel_ips=$(echo $sentinel_ips_list | awk '{print $5}')
 
 get_value() {
 	ip="$1"
