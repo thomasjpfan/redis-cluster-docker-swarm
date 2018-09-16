@@ -5,7 +5,8 @@ jobs:
       - image: docker:18.06.1-ce-git
     steps:
       - checkout
-      - setup_remote_docker
+      - setup_remote_docker:
+          version: 18.06.0-ce
       - run:
           name: Build Images
           command: |
@@ -69,4 +70,3 @@ jobs:
               docker push thomasjpfan/redis-sentinel:latest
               docker push thomasjpfan/redis-utils:latest
             fi
-
